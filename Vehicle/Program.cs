@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace ConsoleApp14
+namespace Vehicles
 {
-    // definera
-    public class Vehicle
+    // definera en abstract Vehicle Class
+    public abstract class Vehicle
     {
         // medlemsvariabler
         private string model;
@@ -38,22 +38,56 @@ namespace ConsoleApp14
             this.manufacturingYear = manufacturingYear;
             totalKilometers = 0; // totala km = 0
         }
+        //abstrakt metod för att printa information
+        public abstract void PrintInfo();
     }
 
+    //subklass "Car"
+    public class Car : Vehicle
+    {
+        
+        public Car(string model, int manufacturingYear) : base(model, manufacturingYear)
+        { 
+        }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine("Motorcykel Modell: " + Model);
+            Console.WriteLine("Brukningsår " + ManufacturingYear);
+            Console.WriteLine("Miltal: " + TotalKilometers);
+        }
+    }
+
+    public class Motorcycle : Vehicle
+    {
+        public Motorcycle(string model, int manufacturingYear) : base(model, manufacturingYear)
+        {
+        }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine("Motorcykel Modell: " + Model);
+            Console.WriteLine("Bruknings år: " + ManufacturingYear);
+            Console.WriteLine("Miltal: " + TotalKilometers);
+        }
+    }
     public class Program
     {
         static void Main(string[] args)
         {
             // skapa en vehicle object
-            Vehicle myVehicle = new Vehicle("Model ABC", 2024);
+            Vehicle car = new Car("Car 123", 1972);
+            Vehicle motorcycle = new Motorcycle("Motorcycle 123", 1972);
+
 
             // bestäm totala km
-            myVehicle.TotalKilometers = 5000;
+            car.TotalKilometers = 5000;
+            motorcycle.TotalKilometers = 3000;
 
             // hämta och printa
-            Console.WriteLine("Model: " + myVehicle.Model);
-            Console.WriteLine("Manufacturing Year: " + myVehicle.ManufacturingYear);
-            Console.WriteLine("Total Kilometers: " + myVehicle.TotalKilometers);
+            car.PrintInfo();
+            Console.WriteLine();
+            motorcycle.PrintInfo();
         }
     }
 }
